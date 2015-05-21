@@ -1,0 +1,34 @@
+public class Solution {
+    /**
+     * @param n the integer to be reversed
+     * @return the reversed integer
+     */
+     
+     //要用long来记录result，不然可能会越界
+    public int reverseInteger(int n) {
+        // Write your code here
+        boolean isNeg = false;
+        if(n < 0){
+            isNeg = true;
+            n *= -1;
+        } 
+        
+        long result = 0;
+        
+        while(n > 0) {
+            result *= 10;
+            result += n % 10;
+            n /= 10;
+        }
+        
+        if(isNeg) {
+            result *= -1;
+        }
+        
+        if (result > Integer.MAX_VALUE || result < Integer.MIN_VALUE) {
+            return 0;
+        }
+        
+        return (int)result;
+    }
+}
