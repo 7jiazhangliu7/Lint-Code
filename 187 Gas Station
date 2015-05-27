@@ -1,0 +1,25 @@
+public class Solution {
+    /**
+     * @param gas: an array of integers
+     * @param cost: an array of integers
+     * @return: an integer
+     */
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        // write your code here
+        int gasInTank = 0;
+        int totalCost = 0;
+        int index = -1;
+        
+        for(int start = 0; start < gas.length; start++) {
+            gasInTank += gas[start] - cost[start];
+            totalCost += gas[start] - cost[start];
+            
+            if(gasInTank < 0) {
+                index = start;
+                gasInTank = 0;
+            }
+        }
+        
+        return totalCost < 0 ? -1 : index+1;
+    }
+}
