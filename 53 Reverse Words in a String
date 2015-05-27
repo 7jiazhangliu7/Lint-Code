@@ -1,0 +1,42 @@
+public class Solution {
+    /**
+     * @param s : A string
+     * @return : A string
+     */
+    public String reverseWords(String s) {
+        // write your code
+        if(s == null) return s;
+        
+        String[] c = s.split(" ");
+        
+        int start = 0, end = c.length-1;
+        
+        while(start < end) {
+            while(c[start].equals(" ")) {
+                start++;
+            }
+            
+            while(c[end].equals(" ")) {
+                end--;
+            }
+            
+            String temp = c[start];
+            c[start] = c[end];
+            c[end] = temp;
+            start++;
+            end--;
+        }
+        
+        StringBuffer sb = new StringBuffer();
+        
+        for(int i = 0; i < c.length; i++) {
+            if(!c[i].equals(" ")) {
+                sb.append(c[i]);
+                sb.append(" ");
+            }
+        }
+        
+        return sb.length() != 0 ? sb.toString().substring(0, sb.length()-1) : "";
+    }
+}
+
