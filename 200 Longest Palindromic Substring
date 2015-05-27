@@ -1,0 +1,37 @@
+http://www.lintcode.com/en/problem/longest-palindromic-substring/
+
+public class Solution {
+    /**
+     * @param s input string
+     * @return the longest palindromic substring
+     */
+    public String longestPalindrome(String s) {
+        // Write your code here
+        if(s == null || s.length() <= 1) return s;
+        
+        String longest = s.substring(0,1);
+        
+        for(int i = 0; i < s.length(); i++) {
+            String cur = helper(s, i, i);
+            if(cur.length() > longest.length()) {
+                longest = cur;
+            }
+            
+            cur = helper(s, i, i+1);
+            if(cur.length() > longest.length()) {
+                longest = cur;
+            }
+        }
+        
+        return longest;
+    }
+    
+    public String helper(String s, int start, int end) {
+        while(start >= 0 && end < s.length() && s.charAt(start) == s.charAt(end)) {
+            start--;
+            end++;
+        }
+        
+        return s.substring(start+1, end);
+    }
+}
