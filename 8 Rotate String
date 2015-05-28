@@ -1,0 +1,21 @@
+http://www.lintcode.com/en/problem/rotate-string/
+
+public class Solution {
+    /*
+     * param A: A string
+     * param offset: Rotate string with offset.
+     * return: Rotated string.
+     */
+    public char[] rotateString(char[] A, int offset) {
+        // wirte your code here
+        if(A == null || A.length == 0) return A;
+        
+        offset %= A.length;
+        
+        String s = new String(A);
+        String second = s.substring(0,A.length-offset);
+        String first = s.substring(A.length-offset, A.length);
+        
+        return (first+second).toCharArray();
+    }
+};
