@@ -1,0 +1,34 @@
+http://www.lintcode.com/en/problem/product-of-array-exclude-itself/
+
+public class Solution {
+    /**
+     * @param A: Given an integers array A
+     * @return: A Long array B and B[i]= A[0] * ... * A[i-1] * A[i+1] * ... * A[n-1]
+     */
+    public ArrayList<Long> productExcludeItself(ArrayList<Integer> A) {
+        // write your code
+        ArrayList<Long> result = new ArrayList<Long>();
+        if(A == null || A.size() <= 0) return result;
+        
+        for(int i = 1; i <= A.size(); i++) {
+            result.add(helper(A, i));
+        }
+        
+        return result;
+    }
+    
+    public long helper(ArrayList<Integer> A, int skip) {
+        long result = 1;
+        
+        for(int i = 0; i < A.size(); i++) {
+            if(i == skip-1) {
+                continue;
+            }
+            
+            result *= A.get(i);
+        }
+        
+        return result;
+    }
+}
+
