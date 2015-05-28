@@ -1,0 +1,22 @@
+http://www.lintcode.com/en/problem/two-strings-are-anagrams/
+
+public class Solution {
+    /**
+     * @param s: The first string
+     * @param b: The second string
+     * @return true or false
+     */
+    public boolean anagram(String s, String t) {
+        // write your code here
+        if(s == null && t == null) return true;
+        if(s == null || t == null) return false;
+        
+        char[] s1 = s.toCharArray();
+        char[] s2 = t.toCharArray();
+        
+        Arrays.sort(s1); Arrays.sort(s2);
+        s = new String(s1); t = new String(s2);
+        
+        return s.equals(t);
+    }
+};
