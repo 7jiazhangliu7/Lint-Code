@@ -1,0 +1,39 @@
+http://www.lintcode.com/en/problem/anagrams/
+
+public class Solution {
+    /**
+     * @param strs: A list of strings
+     * @return: A list of strings
+     */
+    public List<String> anagrams(String[] strs) {
+        // write your code here
+        List<String> result = new LinkedList<String>();
+        HashMap<String, LinkedList<String>> hm = new HashMap<String, LinkedList<String>>();
+        if(strs == null || strs.length == 0) {
+            return result;
+        }
+        
+        for(String str : strs) {
+            char[] charArray = str.toCharArray();
+            Arrays.sort(charArray);
+            String newStr = new String(charArray);
+            if(hm.containsKey(newStr)) {
+                hm.get(newStr).add(str);
+            } else {
+                LinkedList<String> list = new LinkedList<String>();
+                list.add(str);
+                hm.put(newStr, list);
+            }
+        }
+        
+        for(String s : hm.keySet()) {
+            if(hm.get(s).size() > 1) {
+                for(String str : hm.get(s)) {
+                    result.add(str);
+                }
+            }
+        }
+        
+        return result;
+    }
+}
