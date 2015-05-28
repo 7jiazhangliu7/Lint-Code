@@ -1,0 +1,37 @@
+http://www.lintcode.com/en/problem/merge-sorted-array-ii/
+
+class Solution {
+    /**
+     * @param A and B: sorted integer array A and B.
+     * @return: A new sorted integer array
+     */
+    public ArrayList<Integer> mergeSortedArray(ArrayList<Integer> A, ArrayList<Integer> B) {
+        // write your code here
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        if(A == null || B == null) return A == null ? B : A;
+        
+        int iA = 0, iB = 0;
+        
+        while(iA < A.size() && iB < B.size()) {
+            if(A.get(iA) <= B.get(iB)) {
+                result.add(A.get(iA));
+                iA++;
+            } else {
+                result.add(B.get(iB));
+                iB++;
+            }
+        }
+        
+        while(iA < A.size()) {
+            result.add(A.get(iA));
+            iA++;
+        }
+        
+        while(iB < B.size()) {
+            result.add(B.get(iB));
+            iB++;
+        }
+        
+        return result;
+    }
+}
