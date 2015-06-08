@@ -1,0 +1,40 @@
+http://www.lintcode.com/en/problem/single-number-iii/
+
+public class Solution {
+    /**
+     * @param A : An integer array
+     * @return : Two integers
+     */
+    public List<Integer> singleNumberIII(int[] A) {
+        // write your code here
+        List<Integer> result = new LinkedList<Integer>();
+        
+        int result1 = 0, result2 = 0;
+        int xor = 0;
+        if(A== null || A.length == 0) {
+            return result;
+        }
+        
+        for(Integer a : A) {
+            xor = xor ^ a;
+        }
+        
+        int index = 0;
+        while((xor & (1 << index)) == 0) {
+            index++;
+        }
+        
+        for(Integer a : A) {
+            if((a & (1 << index)) == 0) {
+                result1 ^= a;
+            } else {
+                result2 ^= a;
+            }
+        }
+        
+        result.add(result1);
+        result.add(result2);
+        
+        return result;
+    }
+}
