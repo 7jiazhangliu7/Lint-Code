@@ -1,0 +1,48 @@
+/**
+ * Definition for singly-linked list with a random pointer.
+ * class RandomListNode {
+ *     int label;
+ *     RandomListNode next, random;
+ *     RandomListNode(int x) { this.label = x; }
+ * };
+ */
+public class Solution {
+    /**
+     * @param head: The head of linked list with a random pointer.
+     * @return: A new head of a deep copy of the list.
+     */
+    public RandomListNode copyRandomList(RandomListNode head) {
+        // write your code here
+        //http://fisherlei.blogspot.com/2013/11/leetcode-copy-list-with-random-pointer.html
+        
+        if(head == null) return null;
+        
+        RandomListNode cur = head;
+        
+        while(cur != null) {
+            RandomListNode temp = new RandomListNode(cur.label);
+            temp.next = cur.next;
+            cur.next = temp;
+            cur = temp.next;
+        }
+        
+        cur = head;
+        
+        while(cur != null) {
+            RandomListNode temp = cur.next;
+            temp.random = cur.random == null ? null : cur.random.next;
+            cur = temp.next;
+        }
+        
+        cur = head;
+        
+        RandomListNode newNode = head == null ? null : head.next;
+        RandomListNode c = newNode;
+        while(c != null && c.next != null) {
+            c.next = c.next.next;
+            c = c.next;
+        }
+        
+        return newNode;
+    }
+}
