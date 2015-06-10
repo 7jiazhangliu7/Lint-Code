@@ -1,0 +1,49 @@
+/**
+ * Definition of TreeNode:
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left, right;
+ *     public TreeNode(int val) {
+ *         this.val = val;
+ *         this.left = this.right = null;
+ *     }
+ * }
+ */
+public class Solution {
+    /**
+     * @param root: The root of binary tree.
+     * @return: An integer.
+     */
+    public int minDepth(TreeNode root) {
+        if(root == null) return 0;
+        // write your code here
+        List<TreeNode> curr = new LinkedList<TreeNode>();
+        List<TreeNode> next = new LinkedList<TreeNode>();
+        int depth = 1;
+        curr.add(root);
+        
+        while(curr.size() != 0) {
+            TreeNode n = curr.remove(0);
+            
+            if(n.left != null) {
+                next.add(n.left);
+            } 
+            
+            if(n.right != null) {
+                next.add(n.right);
+            } 
+            
+            if(n.left == null && n.right == null) {
+                return depth;
+            }
+            
+            if(curr.size() == 0) {
+                curr = next;
+                next = new LinkedList<TreeNode>();
+                depth++;
+            }
+        }
+        
+        return -1;
+    }
+}
