@@ -1,0 +1,76 @@
+/**
+ * Definition of TreeNode:
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left, right;
+ *     public TreeNode(int val) {
+ *         this.val = val;
+ *         this.left = this.right = null;
+ *     }
+ * }
+ */
+public class Solution {
+    /**
+     * @param root: The root of the binary search tree.
+     * @param value: Remove the node with given value.
+     * @return: The root of the binary search tree after removal.
+     */
+    public TreeNode removeNode(TreeNode root, int value) {
+        // write your code here
+        
+        List<TreeNode> list = new LinkedList<TreeNode>();
+        
+        if(root == null) return root;
+        
+        helper(list, root);
+        ListNode dummy = new ListNode(Integer.MIN_VALUE);
+        ListNode cur = dummy;
+        for(int i = 0; i < list.size();i++) {
+            if(list.get(i).val != value) {
+                cur.next = new ListNode(list.get(i).val);
+                cur = cur.next;
+            } 
+        }
+        
+        return sortedListToBST(dummy.next);
+    }
+    
+    public TreeNode sortedListToBST(ListNode head) {
+        if(head == null) return null;
+        if(head.next == null) return new TreeNode(head.val);
+        
+        ListNode fast = head, slow = head, dummy = new ListNode(-1);
+        
+        while(fast != null && fast.next != null) {
+            fast = fast.next.next;
+            dummy = slow;
+            slow = slow.next;
+        }
+        
+        TreeNode root = new TreeNode(slow.val);
+        
+        root.right = sortedListToBST(slow.next);
+        dummy.next = null;
+        root.left = sortedListToBST(head);
+        
+        return root;
+    }
+    
+    public void helper(List<TreeNode> list, TreeNode root) {
+        if(root == null) {
+            return;
+        }
+        
+        helper(list, root.left);
+        
+        list.add(root);
+        
+        helper(list, root.right);
+    }
+    
+    public class ListNode {
+        int val;
+        ListNode next;
+        ListNode(int x) { val = x; next = null; }
+    }
+}
