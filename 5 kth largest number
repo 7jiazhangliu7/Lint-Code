@@ -1,0 +1,31 @@
+class Solution {
+    //param k : description of k
+    //param numbers : array of numbers
+    //return: description of return
+    public int kthLargestElement(int k, ArrayList<Integer> nums) {
+        // write your code here
+        if(nums == null || nums.size() < 0) {
+            return -1;
+        }
+        
+        PriorityQueue<Integer> pq = new PriorityQueue<Integer>(nums.size(), new Comparator<Integer>() {
+            public int compare(Integer i1, Integer i2) {
+                return -1*(i1.compareTo(i2));
+            }
+        });
+        
+        for(int i : nums) {
+            pq.add(i);
+        }
+        
+        int j = 0;
+        int result = 0;
+        while(j < k) {
+            result = pq.remove();
+            j++;
+        }
+        
+        return result;
+    
+    }
+};
