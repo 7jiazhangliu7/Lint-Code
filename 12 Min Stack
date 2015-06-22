@@ -1,0 +1,31 @@
+import java.util.Stack;
+
+public class Solution {
+    Stack<Integer> stack = new Stack<Integer>();
+    Stack<Integer> minStack = new Stack<Integer>();
+    public Solution() {
+        // do initialize if necessary
+    }
+
+    public void push(int number) {
+        // write your code here
+        stack.push(number);
+        if(number < (minStack.isEmpty() ? Integer.MAX_VALUE : minStack.peek())) {
+            minStack.push(number);
+        } else {
+            minStack.push(minStack.peek());
+        }
+    }
+
+    public int pop() {
+        // write your code here
+        minStack.pop();
+        return stack.pop();
+    }
+
+    public int min() {
+        // write your code here
+        return minStack.peek();
+    }
+}
+
