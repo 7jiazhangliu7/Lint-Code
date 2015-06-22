@@ -1,0 +1,40 @@
+public class Solution {
+    /**
+     * @param nums: A list of integers
+     * @return an integer
+     */
+    public int longestConsecutive(int[] num) {
+        // write you code here
+        if(num == null || num.length == 0) {
+            return -1;
+        }
+        
+        Set<Integer> set = new HashSet<Integer>();
+        
+        int max = 1;
+        int result = 0;
+        for(Integer i : num) {
+            set.add(i);   
+        }
+        
+        for(Integer i : num) {
+            max = 1;
+            int left = i - 1;
+            int right = i + 1;
+            
+            while(set.contains(left)) {
+                max++;
+                set.remove(left--);
+            }
+            
+            while(set.contains(right)) {
+                max++;
+                set.remove(right++);
+            }
+            
+            result = Math.max(max, result);
+        }
+        
+        return result;
+    }
+}
