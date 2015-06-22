@@ -1,0 +1,36 @@
+class Solution {
+    /**
+     * @param k: The number k.
+     * @return: The kth prime number as description.
+     */
+    public long kthPrimeNumber(int n) {
+        // write your code here
+        if (n  <= 0)
+        return 0;
+
+         long[] uglyNumber = new long[n+1];
+         uglyNumber[0] = 1;
+         int nextUglyIndex = 1;
+         int index3 = 0;
+         int index5 = 0;
+         int index7 = 0;
+    
+         while (nextUglyIndex  <=  n){
+            long minimum = Math.min(Math.min(uglyNumber[index3] * 3, uglyNumber[index5] * 5),
+                               uglyNumber[index7] * 7);
+            
+            uglyNumber[nextUglyIndex] = minimum;
+    
+            while (uglyNumber[index3] * 3  <= uglyNumber[nextUglyIndex])
+                ++index3;
+            while (uglyNumber[index5] * 5  <= uglyNumber[nextUglyIndex])
+                ++index5;
+            while (uglyNumber[index7] * 7  <= uglyNumber[nextUglyIndex])
+                ++index7;
+    
+            ++nextUglyIndex;
+         }
+         return uglyNumber[nextUglyIndex - 1];
+    }
+};
+
